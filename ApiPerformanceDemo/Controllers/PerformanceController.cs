@@ -17,8 +17,21 @@ namespace ApiPerformanceDemo.Controllers
         [HttpGet("parallel-tasks")]
         public async Task<IActionResult> GetParallelTasks()
         {
-            var result = await _service.RunParallelTasksAsync();
-            return Ok(result);
+            var parallelTask = _service.RunParallelTasksAsync();
+            var sequentialTask = _service.RunSecuentialTasksAsync();
+
+            await Task.WhenAll(parallelTask, sequentialTask);
+
+            var parallelResult = await parallelTask;
+            var sequentialResult = await sequentialTask;
+
+            var combinedResult = new
+            {
+                ParallelResults = parallelResult,
+                SequentialResults = sequentialResult
+            };
+
+            return Ok(combinedResult);
         }
     }
 }

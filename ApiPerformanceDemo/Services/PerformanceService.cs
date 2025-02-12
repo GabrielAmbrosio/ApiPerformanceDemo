@@ -20,6 +20,23 @@ namespace ApiPerformanceDemo.Services
             return results.ToList();
         }
 
+        public async Task<List<string>> RunSecuentialTasksAsync()
+        {
+            var stopwatch = Stopwatch.StartNew();
+
+            var result1 = await SimulateAsyncOperation("Task 1", 2000);
+            var result2 = await SimulateAsyncOperation("Task 2", 3000);
+            var result3 = await SimulateAsyncOperation("Task 3", 1000);
+
+            stopwatch.Stop();
+
+            var results = new List<string> { result1, result2, result3 };
+
+            results.Add($"Total Time: {stopwatch.ElapsedMilliseconds} ms");
+
+            return results;
+        }
+
         private async Task<string> SimulateAsyncOperation(string name, int delay)
         {
             await Task.Delay(delay);

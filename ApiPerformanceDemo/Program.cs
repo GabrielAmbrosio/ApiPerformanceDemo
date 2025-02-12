@@ -1,8 +1,12 @@
+using ApiPerformanceDemo.Services;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSingleton<PerformanceService>();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -24,5 +28,6 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.MapControllers();
 app.UseHttpsRedirection();
 app.Run();
