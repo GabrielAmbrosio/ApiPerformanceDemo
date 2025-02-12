@@ -26,5 +26,5 @@ It includes performance tuning techniques to optimize response times.
 
 ### 2️⃣ Clone the Repository
 ```sh
-git clone https://github.com/YOUR_USERNAME/ApiPerformanceDemo.git
+git clone https://github.com/GabrielAmbrosio/ApiPerformanceDemo.git
 cd ApiPerformanceDemo
