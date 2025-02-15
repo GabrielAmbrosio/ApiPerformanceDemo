@@ -9,7 +9,10 @@ namespace ApiPerformanceDemo.Benchmarks
         private readonly PerformanceService _service = new PerformanceService();
 
         [Benchmark]
-        public async Task RunParallelTasksAsync() => await _service.RunParallelTasksAsync();
+        public Task RunParallelTasksAsync() => _service.RunParallelTasksAsync();
+
+        [Benchmark]
+        public Task RunSecuentialTasksAsync() => _service.RunSecuentialTasksAsync();
     }
 
     class Program
